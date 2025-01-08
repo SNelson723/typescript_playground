@@ -63,10 +63,24 @@ console.log('Total Case Cost', totalCaseCost);
 document.getElementById('totalCaseCost')!.innerHTML = `Total Case Cost: $${totalCaseCost}`
 
 // cost of all purchased items
-// total returns
-// total free items
-// total returns
 
+// total free items
+const totalFreeItems = Box(data)
+  .map((x: IData[]) => x.filter((y: IData) => y.free == '1'))
+  .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.cases) + Number(cur.units), 0))
+  // .trace()
+  .fold((x: number) => x);
+
+console.log('Total Free Items', totalFreeItems);
+document.getElementById('totalFreeItems')!.innerHTML = `Total Free Items: ${totalFreeItems}`
+
+// total returns
+const totalReturns = Box(data)
+  .map((x: IData[]) => x.filter((y: IData) => y.return_item == '1'))
+  .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.cases) + Number(cur.units), 0))
+  .trace()
+
+console.log(totalReturns);
 
 // total purchased
 const totalPurchased = Box(data)
