@@ -53,7 +53,13 @@ const totalCases = Box(data)
 // total case cost
 const totalCaseCost = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => Number(y.cases) > 0))
-  .trace()
+  .map((x: IData[]) => x.filter((y: IData) => y.free != '1' && y.return_item != '1'))
+  .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += +cur.cases * parseFloat(cur.cost as string) , 0))
+  // .trace()
+  .fold((x: number) => x)
+
+
+console.log('Total Case Cost', totalCaseCost);
 
 
 // cost of all purchased items
