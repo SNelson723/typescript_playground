@@ -1,8 +1,5 @@
 import { add } from './modules/math';
 
-
-console.log('you are ready to start coding typescript...');
-
 const root = document.createElement('div');
 root.id = 'root';
 document.body.appendChild(root);
@@ -13,7 +10,7 @@ const child = document.createElement('p');
 main.appendChild(child);
 root.appendChild(main);
 
-
+// start of the sandboxing
 import { Box } from './Box';
 import { data, IData } from './data';
 
@@ -66,7 +63,7 @@ document.getElementById('totalCaseCost')!.innerHTML = `Total Case Cost: $${total
 
 // cost of all purchased items => still need to do
 
-// total free items
+// total free items => DONE?
 const totalFreeItems = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.free == '1'))
   .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.cases) + Number(cur.units), 0))
@@ -99,6 +96,6 @@ const totalPurchased = Box(data)
   })))
   .map((x: IData[]) => x.reduce((acc, cur) => cur.return_item ? acc - +cur.cases + +cur.units : +cur.cases + +cur.units, 0))
   .map((x: number) => `$${x.toFixed(2)}`)
-  .fold((x: string) => x)
+  .fold((x: string) => x);
 
-  console.log(totalPurchased)
+  console.log(totalPurchased);
