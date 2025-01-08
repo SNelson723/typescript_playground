@@ -78,9 +78,10 @@ document.getElementById('totalFreeItems')!.innerHTML = `Total Free Items: ${tota
 const totalReturns = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.return_item == '1'))
   .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.cases) + Number(cur.units), 0))
-  .trace()
+  // .trace()
+  .fold((x: number) => x);
 
-console.log(totalReturns);
+console.log('Total Returns', totalReturns);
 
 // total purchased
 const totalPurchased = Box(data)
