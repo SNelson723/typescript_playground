@@ -17,7 +17,7 @@ root.appendChild(main);
 import { Box } from './Box';
 import { data, IData } from './data';
 
-// total units
+// total units => DONE
 const totalUnits = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => Number(y.units as string) > 0))
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
@@ -28,7 +28,7 @@ const totalUnits = Box(data)
 console.log('Total Units', totalUnits);
 document.getElementById('totalUnits')!.innerHTML = `Total Units: ${totalUnits}`;
 
-// total unit cost
+// total unit cost => DONE
 const totalUnitCost = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => Number(y.units) > 0))
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
@@ -40,10 +40,11 @@ const totalUnitCost = Box(data)
 console.log('Total Unit Cost', totalUnitCost);
 document.getElementById('totalUnitCost')!.innerHTML = `Total Unit Cost: ${totalUnitCost}`
 
-// total cases
+// total cases => DONE
 const totalCases = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => Number(y.cases) > 0))
-  .map((X: IData[]) => X.filter((y: IData) => y.free != '1' && y.return_item != '1'))
+  .map((X: IData[]) => X.filter((y: IData) => y.free != '1'))
+  .map((x: IData[]) => x.filter((y: IData) => y.return_item != '1'))
   .map((x: IData[]) => x.reduce((total: number, curr: IData) => total += Number(curr.cases), 0))
   .fold((x: number) => x);
 
@@ -63,7 +64,7 @@ const totalCaseCost = Box(data)
 console.log('Total Case Cost', totalCaseCost);
 document.getElementById('totalCaseCost')!.innerHTML = `Total Case Cost: $${totalCaseCost}`
 
-// cost of all purchased items
+// cost of all purchased items => still need to do
 
 // total free items
 const totalFreeItems = Box(data)
@@ -76,7 +77,7 @@ console.log('Total Free Items', totalFreeItems);
 document.getElementById('totalFreeItems')!.innerHTML = `Total Free Items: ${totalFreeItems}`
 
 
-// total returns
+// total returns => DONE
 const totalReturns = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.return_item == '1'))
   .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.cases) + Number(cur.units), 0))
@@ -87,7 +88,7 @@ console.log('Total Returns', totalReturns);
 document.getElementById('totalReturns')!.innerHTML = `Total Returns: ${totalReturns}`;
 
 
-// total purchased
+// total purchased => DONE
 const totalPurchased = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
   .map((x: IData[]) => x.map((y: IData) => ({
