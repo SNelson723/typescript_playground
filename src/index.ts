@@ -27,6 +27,7 @@ const totalUnits = Box(data)
   .fold((x: number) => x);
 
 console.log('Total Units', totalUnits);
+document.getElementById('totalUnits')!.innerHTML = `Total Units: ${totalUnits}`;
 
 // total unit cost
 const totalUnitCost = Box(data)
@@ -34,9 +35,11 @@ const totalUnitCost = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
   .map((x: IData[]) => x.filter((y: IData) => y.return_item != '1'))
   .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += Number(cur.units) * parseFloat(cur.cost as string), 0))
-  .fold((x: IData[]) => x);
+  .map((x: number) => `$${x.toFixed(2)}`)
+  .fold((x: number) => x);
 
 console.log('Total Unit Cost', totalUnitCost);
+document.getElementById('totalUnitCost')!.innerHTML = `Total Unit Cost: ${totalUnitCost}`
 
 // total cases
 // total case cost
@@ -45,3 +48,15 @@ console.log('Total Unit Cost', totalUnitCost);
 // total free items
 // total returns
 
+// total purchased
+const trace = <T>(x: T) => {
+  console.log(x);
+  return x;
+};
+
+const totalPurchased = Box(data)
+  .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
+  .trace()
+  .fold((x: IData[]) => x)
+
+  // console.log(totalPurchased)
