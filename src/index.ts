@@ -47,6 +47,9 @@ document.getElementById('totalUnitCost')!.innerHTML = `Total Unit Cost: ${totalU
 // total returns
 // total free items
 // total returns
+const totalReturns = Box(data)
+  // .map
+
 
 // total purchased
 const trace = <T>(x: T) => {
@@ -56,7 +59,15 @@ const trace = <T>(x: T) => {
 
 const totalPurchased = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1'))
-  .trace()
-  .fold((x: IData[]) => x)
+  .map((x: IData[]) => x.map((y: IData) => ({
+    cases: parseInt(y.units as string) * parseFloat(y.cost as string),
+    units: parseInt(y.units as string) * parseFloat(y.cost as string),
+    return_item: y.return_item,
+    upc: y.upc
+  })))
+  .map((x: IData[]) => x.reduce((acc, cur) => cur.return_item ? acc - +cur.cases + +cur.units : +cur.cases + +cur.units, 0))
+  // .trace()
+  .map((x: number) => `$${x.toFixed(2)}`)
+  .fold((x: string) => x)
 
-  // console.log(totalPurchased)
+  console.log(totalPurchased)
