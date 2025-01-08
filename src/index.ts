@@ -60,17 +60,12 @@ const totalCaseCost = Box(data)
 
 
 console.log('Total Case Cost', totalCaseCost);
-
+document.getElementById('totalCaseCost')!.innerHTML = `Total Case Cost: $${totalCaseCost}`
 
 // cost of all purchased items
 // total returns
 // total free items
-
 // total returns
-// const totalReturns = Box(data)
-//   .map((x: IData[]) => x.filter((y: IData) => y.return_item == '1'))
-//   .trace()
-  // .fold((x: IData[]) => x)
 
 
 // total purchased
