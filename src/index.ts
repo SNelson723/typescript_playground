@@ -82,6 +82,7 @@ const totalReturns = Box(data)
   .fold((x: number) => x);
 
 console.log('Total Returns', totalReturns);
+document.getElementById('totalReturns')!.innerHTML = `Total Returns: ${totalReturns}`;
 
 // total purchased
 const totalPurchased = Box(data)
