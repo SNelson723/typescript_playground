@@ -51,6 +51,9 @@ const totalCases = Box(data)
   document.getElementById('totalCases')!.innerHTML = `Total Cases: ${totalCases}`;
 
 // total case cost
+const totalCaseCost = Box(data)
+  .map((x: IData[]) => x.filter((y: IData) => Number(y.cases) > 0))
+  .trace()
 
 
 // cost of all purchased items
