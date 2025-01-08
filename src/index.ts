@@ -56,6 +56,7 @@ const totalCaseCost = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.free != '1' && y.return_item != '1'))
   .map((x: IData[]) => x.reduce((total: number, cur: IData) => total += +cur.cases * parseFloat(cur.cost as string) , 0))
   // .trace()
+  .map((x: number) => `$${x.toFixed(2)}`)
   .fold((x: number) => x)
 
 
@@ -74,6 +75,7 @@ const totalFreeItems = Box(data)
 console.log('Total Free Items', totalFreeItems);
 document.getElementById('totalFreeItems')!.innerHTML = `Total Free Items: ${totalFreeItems}`
 
+
 // total returns
 const totalReturns = Box(data)
   .map((x: IData[]) => x.filter((y: IData) => y.return_item == '1'))
@@ -83,6 +85,7 @@ const totalReturns = Box(data)
 
 console.log('Total Returns', totalReturns);
 document.getElementById('totalReturns')!.innerHTML = `Total Returns: ${totalReturns}`;
+
 
 // total purchased
 const totalPurchased = Box(data)
